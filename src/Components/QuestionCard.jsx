@@ -3,6 +3,8 @@ import { Card, CardContent, Typography, Button, Box, TextField } from '@mui/mate
 import FreeAns from './QuestionTypes/FreeAns';
 import FiillInBlanks from './QuestionTypes/FillBlanks';
 import Sorting from './QuestionTypes/Sorting';
+import SingleChoice from './QuestionTypes/SingleChoice';
+import SelectMultiple from './QuestionTypes/SelectMultiple';
 
 const QuestionCard = ({ question }) => {
   const handleSubmit = (e) =>{
@@ -19,7 +21,7 @@ const QuestionCard = ({ question }) => {
     <Card sx={{ maxWidth:"50%", minWidth:"20vw", paddingBlock:1, marginBlock:2}}>
       <CardContent sx={{textAlign: "start"}}>
         {
-          question.type === "free_ans" ?  <FreeAns que={question} /> : question.type === "fill_in_the_blanks" ?  <FiillInBlanks que={question} />  : <Sorting que={question}/>
+          question.type === "free_ans" ?  <FreeAns que={question} /> : question.type === "fill_in_the_blanks" ?  <FiillInBlanks que={question} /> : question.type === "single_choice" ?  <SingleChoice que={question} /> : question.type === "select_multiple" ?  <SelectMultiple que={question} />: <Sorting que={question}/>
         }
         
         {/* <Typography variant='h5'>{question.question}</Typography> */}

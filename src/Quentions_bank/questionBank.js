@@ -67,6 +67,21 @@ const questionBank = [
 
         ]
     },
+    {
+        id: 6,
+        type: "single_choice",
+        question: "3 + 5 = 8",
+        options: ["correct", "incorrect"],
+        ans:"correct"
+    },
+    {
+        id: 7,
+        type: "select_multiple",
+        question: "Which of the following number is divisible by 2 ",
+        options:[1,2,3,4,5,6,7,8],
+        ans:[2,4,6,8]
+    },
+
 
 ]
 export default questionBank;

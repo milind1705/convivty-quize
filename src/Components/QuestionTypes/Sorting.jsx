@@ -22,7 +22,9 @@ const Sorting = ({que}) => {
     }
     const onDragEnd = (result)=>{
         console.log(result)
-        if(!result.destination.droppableId) return;
+        if(!result.destination){
+            return;
+        };
         const newOptions = [...options];
         const [removed] = newOptions.splice(result.source.index, 1);
         newOptions.splice(result.destination.index, 0, removed);
