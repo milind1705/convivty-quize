@@ -3,7 +3,7 @@ import React from 'react'
 
 const FreeAns = ({que}) => {
     let ansArray = que.ans.map(item => item.toString())
-    console.log(ansArray)
+    // console.log(ansArray)
     const handleSubmit = (e) =>{
         e.preventDefault();
         const answer =  e.target.ans.value.trim();

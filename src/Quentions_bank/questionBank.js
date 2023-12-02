@@ -28,9 +28,44 @@ const questionBank = [
     },
     {
         id: 5,
-        type: "free_ans",
-        question: "3 + 5 =",
-        ans:[8, "eight"]
+        type: "sorting",
+        question: "sort the option in correct order.",
+        options:[
+            {id:4,
+            option: "D"
+            },
+             {id:3,
+                option: "C"
+            },
+              {id:2,
+                option: "B"
+            },
+            {id:5,
+            option: "E"
+            },
+            {id:1,
+            option: "A"
+            },
+
+        ],
+        ans:[
+            {id:1,
+            option: "A"
+            },
+             {id:2,
+                option: "B"
+            },
+              {id:3,
+                option: "C"
+            },
+            {id:4,
+            option: "D"
+            },
+            {id:5,
+            option: "E"
+            },
+
+        ]
     },
 
 ]

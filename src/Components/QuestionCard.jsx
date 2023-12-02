@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, Button, Box, TextField } from '@mui/material';
 import FreeAns from './QuestionTypes/FreeAns';
 import FiillInBlanks from './QuestionTypes/FillBlanks';
+import Sorting from './QuestionTypes/Sorting';
 
 const QuestionCard = ({ question }) => {
   const handleSubmit = (e) =>{
@@ -15,10 +16,10 @@ const QuestionCard = ({ question }) => {
     }
 }
   return (
-    <Card sx={{ maxWidth:"50%", paddingBlock:1, marginBlock:2}}>
+    <Card sx={{ maxWidth:"50%", minWidth:"20vw", paddingBlock:1, marginBlock:2}}>
       <CardContent sx={{textAlign: "start"}}>
         {
-          question.type == "free_ans" ?  <FreeAns que={question} /> : <FiillInBlanks que={question} />
+          question.type === "free_ans" ?  <FreeAns que={question} /> : question.type === "fill_in_the_blanks" ?  <FiillInBlanks que={question} />  : <Sorting que={question}/>
         }
         
         {/* <Typography variant='h5'>{question.question}</Typography> */}
