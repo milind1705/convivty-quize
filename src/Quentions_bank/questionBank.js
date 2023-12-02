@@ -9,17 +9,15 @@ const questionBank = [
     {
         id: 2,
         type: "fill_in_the_blanks",
-        question: "Robbin have 2 Apples and 3 bananas, so Robbin has __________ no. of fruits ",
-        ans:[5],
+        question: "Robbin have 2 Apples and 3 bananas, so Robbin has {5} no. of fruits ",
         options: [4, 5, 6, 7],
         attempts: 3
     },
     {
         id: 3,
         type: "fill_in_the_blanks",
-        question: "Robbin have 2 Apples and 3 bananas, so Robbin has __________ no. of fruits ",
-        ans:[5],
-        options: [4, 5, 6, 7],
+        question: "Robbin {[play],[love],[hate]} soccer.",
+        options: ["play", "love", "hate", "watch"],
         attempts: 3
     },
      {
