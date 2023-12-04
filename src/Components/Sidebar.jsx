@@ -13,8 +13,9 @@ const Sidebar = () => {
       <Box component={"div"} sx={{
         paddingBlock:2,
         border:"1px transperent ",
-        marginBlock: 10,
-        cursor:"pointer"
+        margin: 10,
+        cursor:"pointer",
+        background:"#DDDDDD"
       }} onClick={()=>{
         navigate("/")
       }}> 

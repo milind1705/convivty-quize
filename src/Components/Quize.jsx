@@ -9,13 +9,27 @@ import ClearIcon from '@mui/icons-material/Clear';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
 const Quize = () => {
   const [mute, setMute] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(questionBank[0]);
-  const [status, setStatus]  = useState("active");
+  const [currentQuestion, setCurrentQuestion] = useState({});
   const [flag, setFlag] = useState(false);
+  useEffect(()=>{
+    setCurrentQuestion(questionBank[0])
+  },[])
+
+  useEffect(()=>{
+   for(let que of questionBank){
+    if(que.status === "active"){
+      setCurrentQuestion(que)
+      break;
+    } 
+    
+   }
+    // console.log(currentQuestion)
+  }, [])
+
 
   const handleNext = ()=>{
     currentQuestion.status = currentQuestion.status === "active" ? "not visited" : currentQuestion.status;
-    console.log(currentQuestion)
+    // console.log(currentQuestion)
     let currentIndex = questionBank.indexOf(currentQuestion);
     
     setCurrentQuestion(questionBank[currentIndex + 1])
@@ -131,7 +145,7 @@ const Quize = () => {
       <Box component={"div"} sx={{
         display:"block"
       }}>
-                <QuestionCard question={currentQuestion} mute={mute} setStatus={setStatus}/>
+                <QuestionCard question={currentQuestion} mute={mute} />
 
       </Box>
         <Button sx={{marginLeft:2, padding:2, display:"block", background:"green"}} variant='contained' type='submit' disabled={questionBank.indexOf(currentQuestion) === questionBank.length -1 }  onClick={()=>{handleNext()}}>

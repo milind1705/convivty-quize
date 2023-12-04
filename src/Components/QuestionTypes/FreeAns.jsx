@@ -2,7 +2,7 @@ import { Box, Button, Input, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import playSound from '../PlaySound'
 const FreeAns = ({que, mute, setStatus}) => {
-    let ansArray = que.ans.map(item => item.toString())
+    let ansArray = que?.ans?.map(item => item.toString())
     // console.log(ansArray)
     const [attempts, setAttempts] = useState(que.attempts)
     const handleSubmit = (e) =>{
