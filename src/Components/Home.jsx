@@ -1,16 +1,22 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import Sidebar from './Sidebar'
+import PrimarySearchAppBar from './Navbar'
 import Main from './Main'
+import { Outlet } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <Box sx={{
-        display:"flex",
-        flexDirection:"row"
-    }}>
-        <Sidebar />
-        <Main />
+    <Box>
+      <PrimarySearchAppBar />
+      <Box sx={{
+          display:"flex",
+          flexDirection:"row"
+      }}>
+          <Sidebar />
+          <Outlet />
+          {/* <Main /> */}
+      </Box>
     </Box>
   )
 }

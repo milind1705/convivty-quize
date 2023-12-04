@@ -5,8 +5,9 @@ import FiillInBlanks from './QuestionTypes/FillBlanks';
 import Sorting from './QuestionTypes/Sorting';
 import SingleChoice from './QuestionTypes/SingleChoice';
 import SelectMultiple from './QuestionTypes/SelectMultiple';
+import MatrixSorting from './QuestionTypes/MatrixSorting';
 
-const QuestionCard = ({ question }) => {
+const QuestionCard = ({ question, mute, setStatus }) => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     const answer =  e.target.ans.value.trim();
@@ -21,17 +22,9 @@ const QuestionCard = ({ question }) => {
     <Card sx={{ maxWidth:"50%", minWidth:"20vw", paddingBlock:1, marginBlock:2}}>
       <CardContent sx={{textAlign: "start"}}>
         {
-          question.type === "free_ans" ?  <FreeAns que={question} /> : question.type === "fill_in_the_blanks" ?  <FiillInBlanks que={question} /> : question.type === "single_choice" ?  <SingleChoice que={question} /> : question.type === "select_multiple" ?  <SelectMultiple que={question} />: <Sorting que={question}/>
+           question.type === "fill_in_the_blanks" ?  <FiillInBlanks que={question} mute={mute}/> : question.type === "single_choice" ?  <SingleChoice que={question} mute={mute} /> : question.type === "select_multiple" ?  <SelectMultiple que={question} mute={mute} /> : question.type === "sorting" ? <Sorting que={question} mute={mute} /> : question.type === "matrix_sorting" ? <MatrixSorting que={question} mute={mute}/> : <FreeAns que={question} mute={mute} />
         }
         
-        {/* <Typography variant='h5'>{question.question}</Typography> */}
-        
-        {/* <Box component={"form"} onSubmit={(e)=>handleSubmit(e)}>
-
-        <Button sx={{marginLeft:2, padding:2}} variant='contained' type='submit'>
-            Check
-        </Button>
-    </Box> */}
       </CardContent>
     </Card>
   );

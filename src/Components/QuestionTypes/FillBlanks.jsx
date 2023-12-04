@@ -1,7 +1,9 @@
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import playSound from '../PlaySound'
+const FiillInBlanks = ({que, mute}) => {
+    const [attempts, setAttempts] = useState(que.attempts)
 
-const FiillInBlanks = ({que}) => {
     const question = que.question;
     const regex = /{([^}]+)}/g
     const ans = question.match(regex);
@@ -11,32 +13,36 @@ const FiillInBlanks = ({que}) => {
     const newQuestion = question.replace(regex, '______');
     const handleSubmit = (e) =>{
         e.preventDefault();
+        que.attempts = que.attempts -1 ;
+        setAttempts(que.attempts);
         const answer =  e.target.answer.value;
 
         if(finalAnswer.includes(answer)){
-            alert("correct")
+            playSound(mute, true);
+            que.status = "correct";
         }else{
-            alert("wrong answer")
+            playSound(mute, false);
+            que.status = "wrong";
         }
     }
   return (
     <Box component={"form"} onSubmit={(e)=>handleSubmit(e)}>
-        <Typography variant='h4'>
+        <Typography variant='h6'>
             {newQuestion}
         </Typography>
-        
+        <Typography paddingBlock={1}>{`${attempts} attempt(s) left`} </Typography>
         <FormControl >
-            <RadioGroup>
+            <RadioGroup disabled={que.attempts <= 0}>
             {que.options.map((option)=>{
                 return(
 
-                    <FormControlLabel name='answer' label={option} value={option} control={<Radio/>} />
+                    <FormControlLabel key={option.toString()} name='answer' label={option} value={option} control={<Radio/>} />
                 )
             })}
             </RadioGroup>
         </FormControl>
 
-        <Button sx={{margin:2, padding:2, display:"block"}} variant='contained' type='submit'>
+        <Button sx={{margin:2, padding:2, display:"block"}} variant='contained'disabled={que.attempts <= 0} type='submit'>
             Check
         </Button>
     </Box>

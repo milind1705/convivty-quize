@@ -1,27 +1,37 @@
 import { Box, Button, ListItem, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-const Sorting = ({que}) => {
-    const [options, setOptions] = useState(que.options)
+import playSound from '../PlaySound'
+
+const Sorting = ({que, mute}) => {
+    const [options, setOptions] = useState(que.options);
+    const [attempts, setAttempts] = useState(que.attempts);
+
     const handleSubmit = (e) =>{
         e.preventDefault();
+        que.attempts = que.attempts -1 ;
+        setAttempts(que.attempts);
         const answer =  options;
-        alert(checkAns(answer, que.ans))
-       console.log(checkAns(answer, que.ans))
+        if(checkAns(answer, que.ans)){
+            playSound(mute, true);
+                  que.status = "correct";
+              }else{
+                  playSound(mute, false);
+                  que.status = "wrong";
+              }
      
     };
     const checkAns  = (newAns, orignleAns)=>{
 
         for (let i = 0; i < newAns.length; i++) {
-            if (newAns[i].id !== orignleAns[i].id || newAns[i].option !== orignleAns[i].option) {
+            if (newAns[i] !== orignleAns[i]) {
                 return false
             } 
-           
-        }
+        }    
         return true
     }
     const onDragEnd = (result)=>{
-        console.log(result)
+        // console.log(result)
         if(!result.destination){
             return;
         };
@@ -33,10 +43,11 @@ const Sorting = ({que}) => {
     }
   return (
     <Box component={"form"} onSubmit={(e)=>handleSubmit(e)}>
-        <Typography variant='h4'>
+        <Typography variant='h6'>
             {que.question}
         </Typography>
-      
+        <Typography paddingBlock={1}>{`${attempts} attempt(s) left`} </Typography>
+
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId='droppable'>
                 {
@@ -47,7 +58,7 @@ const Sorting = ({que}) => {
                         {
                              options.map((item, index)=>{
                                 return(
-                                    <Draggable key={item.id} draggableId={item.id.toString()} index={index}>  
+                                    <Draggable key={item} draggableId={item.toString()} index={index} isDragDisabled={que.attempts <= 0} >  
                                     {(provided, snapshot) => (  
                                    <Box component={"div"}
                                      ref={provided.innerRef}  
@@ -56,7 +67,7 @@ const Sorting = ({que}) => {
                                    >  
                                    <Box component={"div"} sx={{padding:2, border:"solid 1px gold", marginBlock:1}}>
 
-                                   <Typography>{item.option}</Typography>
+                                   <Typography>{item}</Typography>
                                    </Box>
                                     {/* <ListItem item={item} /> */}
                                    </Box>  
@@ -73,7 +84,7 @@ const Sorting = ({que}) => {
             </Droppable>
         </DragDropContext>
 
-        <Button sx={{margin:2, padding:2, display:"block"}} variant='contained' type='submit'>
+        <Button sx={{margin:2, padding:2, display:"block"}} variant='contained' disabled={que.attempts <= 0}  type='submit'>
             Check
         </Button>
     </Box>
